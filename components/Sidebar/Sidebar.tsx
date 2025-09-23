@@ -29,7 +29,7 @@ const Sidebar = () => {
   return (
     <Box
       as="aside"
-      w="80"
+      width="380px"
       minH="100vh"
       borderRightWidth="1px"
       borderRightColor="gray.200"
