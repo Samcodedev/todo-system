@@ -32,7 +32,7 @@ function TopBody() {
           {
             topBodyButton.map((item) => {
               return(
-                <HeaderButton color={item.color} text={item.text} icon={item.icon} padding='22px' paddingV='20px' />
+                <HeaderButton key={item.text} color={item.color} text={item.text} icon={item.icon} padding='22px' paddingV='20px' />
               )
             })
           }

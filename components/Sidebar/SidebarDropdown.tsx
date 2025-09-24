@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
-import { Box, Button, Flex, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import SidebarItem from "./SidebarItem";
 
 interface SidebarDropdownProps {
@@ -24,7 +24,7 @@ const SidebarDropdown: React.FC<SidebarDropdownProps> = ({
 
   const handleClick = () => {
     if (collapsed && expandSidebar) {
-      expandSidebar(); // expand sidebar if collapsed
+      expandSidebar();
       setOpen(true);
     } else {
       setOpen(!open);

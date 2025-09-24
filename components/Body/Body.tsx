@@ -1,9 +1,7 @@
-// src/pages/index.tsx
-import { Box, Flex, Container, VStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import Header from './Header';
 import TopBody from '../ui/TopBody';
 import TableFilter from '../ui/TableFilter';
-// import DashboardContent from '../components/dashboard/DashboardContent';
 
 const DashboardPage = () => {
   return (

@@ -23,7 +23,7 @@ function TableFilter() {
     ]
 
   return (
-    <Box padding='20px'>
+    <Box padding='20px' backgroundColor='white'>
         <Flex justifyContent='space-between' padding='10px' backgroundColor='#E9F5F7' rounded='10px'>
             <InputGroup width='300px' startElement={<SearchNormal1 size='18px' color="#1A1C1E" />}>
                 <Input color='#1A1C1E' borderRadius='10px' backgroundColor='white' borderColor='white' borderWidth='0px' placeholder="Search for To-Do" />
@@ -43,7 +43,7 @@ function TableFilter() {
             {
                 categories.map((item) => {
                     return(
-                        <TodoCategories text={item.text} color={item.color} value={item.value} icon={item.icon} />
+                        <TodoCategories  key={item.text} text={item.text} color={item.color} value={item.value} icon={item.icon} />
                     )
                 })
             }

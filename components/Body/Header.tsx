@@ -1,12 +1,11 @@
 "use client";
 
 import {
-  Box,
   Button,
   Flex, Input, InputGroup,
   Text
 } from "@chakra-ui/react";
-import { SearchNormal1, CloseCircle, Link1, Notification, ArrowDown3 } from "iconsax-react";
+import { SearchNormal1, CloseCircle, Link1, Notification } from "iconsax-react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import HeaderIcon from "../ui/HeaderIcon";
 import HeaderButton from "../ui/HeaderButton";
@@ -38,7 +37,7 @@ const Header = () => {
           {
             headerIcons.map((item) => {
               return(
-                <HeaderIcon src={item.src} alt={item.alt}/>
+                <HeaderIcon key={item.src} src={item.src} alt={item.alt}/>
               )
             })
           }
@@ -50,7 +49,7 @@ const Header = () => {
             {
               headerButton.map((item) => {
                 return(
-                  <HeaderButton text={item.text} color={item.color} icon padding='3px' paddingV='12px' />
+                  <HeaderButton key={item.text} text={item.text} color={item.color} icon padding='3px' paddingV='12px' />
                 )
               })
             }

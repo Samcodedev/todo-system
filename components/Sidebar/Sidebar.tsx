@@ -53,7 +53,7 @@ const Sidebar = () => {
       justifyContent="space-between"
       transition="width 0.3s ease"
     >
-      {/* Logo & Toggle */}
+      
       <Box>
         <Flex
           padding="20px"
@@ -126,7 +126,7 @@ const Sidebar = () => {
               { label: "Group Settings", href: "/department/group" },
             ]}
             collapsed={isCollapsed}
-            onOpen={() => setIsCollapsed(false)} // auto-expand on dropdown click
+            onOpen={() => setIsCollapsed(false)}
           />
           <SidebarItem
             icon={<Call size="18" color="#7988A9" />}
@@ -170,12 +170,11 @@ const Sidebar = () => {
               { label: "Follow up system", href: "/admin/followup" },
             ]}
             collapsed={isCollapsed}
-            onOpen={() => setIsCollapsed(false)} // auto-expand on dropdown click
+            onOpen={() => setIsCollapsed(false)}
           />
         </VStack>
       </Box>
 
-      {/* Footer Section */}
       {!isCollapsed && (
         <Box
           p={4}
@@ -196,7 +195,14 @@ const Sidebar = () => {
               px="3"
               py="1.5"
               rounded="8px"
+              display='flex'
             >
+              <Image 
+                src={`/avatars/country.svg`}
+                width='20'
+                height='20'
+                alt='Profile-image'
+              />
               <Select.Trigger borderWidth="0px">
                 <Select.ValueText color="#464B50" placeholder="English" />
               </Select.Trigger>
@@ -206,7 +212,7 @@ const Sidebar = () => {
             </Select.Control>
             <Portal>
               <Select.Positioner>
-                <Select.Content>
+                <Select.Content backgroundColor='white' color='#464B50'>
                   {frameworks.items.map((framework) => (
                     <Select.Item item={framework} key={framework.value}>
                       {framework.label}
