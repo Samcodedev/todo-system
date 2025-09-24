@@ -11,7 +11,7 @@ function TopBody() {
   return (
     <Flex justifyContent='space-between' padding='20px' width='full' borderBottomWidth='1px' borderBottomColor='#CDD6E9'>
         <Flex alignItems='center' gap='30px'>
-            <Box padding='15px' borderWidth='1px' rounded='full' borderColor='#CDD6E9'>
+            <Box padding='10px' borderWidth='1px' rounded='full' cursor='pointer' borderColor='#CDD6E9'>
                 <ArrowCircleLeft2 color='#464B50' size='26px' />
             </Box>
             <Text color='#464B50' fontSize='30px' fontWeight='700' >Afdeling Kwaliteit</Text>

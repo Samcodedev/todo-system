@@ -14,22 +14,36 @@ import {
   MessageEdit,
   Edit,
 } from "iconsax-react";
-import { Box, Flex, Text, VStack,  Portal, Select, createListCollection , Switch } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  VStack,
+  Portal,
+  Select,
+  createListCollection,
+  Switch,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import SidebarItem from "./SidebarItem";
 import SidebarDropdown from "./SidebarDropdown";
+import Image from "next/image";
+import { LuArrowLeftToLine, LuArrowRightToLine } from "react-icons/lu";
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const frameworks = createListCollection({
     items: [
       { label: "English", value: "English" },
       { label: "Chines", value: "Chines" },
     ],
-  })
+  });
+
   return (
     <Box
       as="aside"
-      width="380px"
+      width={isCollapsed ? "80px" : "300px"}
       minH="100vh"
       borderRightWidth="1px"
       borderRightColor="gray.200"
@@ -37,25 +51,67 @@ const Sidebar = () => {
       display="flex"
       flexDir="column"
       justifyContent="space-between"
+      transition="width 0.3s ease"
     >
-      {/* Logo */}
+      {/* Logo & Toggle */}
       <Box>
-        <Flex px={4} py={4} align="center" gap={2}>
-          <Text fontSize="xl" fontWeight="bold" color="teal.600">
-            mkv
-          </Text>
-          <Text fontSize="sm" color="gray.500">
-            Medische Kliniek Velsen
-          </Text>
+        <Flex
+          padding="20px"
+          height='100px'
+          justifyContent={isCollapsed ? "center" : "space-between"}
+          paddingBottom="40px"
+          align="center"
+          gap={2}
+        >
+          {!isCollapsed && (
+            <Image
+              src={`/avatars/logo.svg`}
+              width="150"
+              height="150"
+              alt="logo"
+            />
+          )}
+          <Box onClick={() => setIsCollapsed(!isCollapsed)} cursor="pointer">
+            {isCollapsed ? (
+              <LuArrowRightToLine size="20px" color="#464B50" />
+            ) : (
+              <LuArrowLeftToLine size="20px" color="#464B50" />
+            )}
+          </Box>
         </Flex>
 
         {/* Menu Items */}
-        <VStack align="stretch" mb="70px">
-          <SidebarItem icon={<Category size="18" color="#7988A9" />} label="Home" href="/" />
-          <SidebarItem icon={<Stickynote size="18" color="#7988A9" />} label="MKVanBinnen" href="/mkv" />
-          <SidebarItem icon={<Folder2 size="18" color="#7988A9" />} label="Document Management" href="/docs" />
-          <SidebarItem icon={<People size="18" color="#7988A9" />} label="Patient Information" href="/patients" />
-          <SidebarItem icon={<Note1 size="18" color="#7988A9" />} label="Agenda" href="/agenda" />
+        <VStack align="stretch" mb="70px" spacing={1}>
+          <SidebarItem
+            icon={<Category size="18" color="#7988A9" />}
+            label="Home"
+            href="/"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<Stickynote size="18" color="#7988A9" />}
+            label="MKVanBinnen"
+            href="/mkv"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<Folder2 size="18" color="#7988A9" />}
+            label="Document Management"
+            href="/docs"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<People size="18" color="#7988A9" />}
+            label="Patient Information"
+            href="/patients"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<Note1 size="18" color="#7988A9" />}
+            label="Agenda"
+            href="/agenda"
+            collapsed={isCollapsed}
+          />
 
           <SidebarDropdown
             icon={<Buildings size="18" color="#7988A9" />}
@@ -69,12 +125,39 @@ const Sidebar = () => {
               { label: "Follow up system", href: "/department/knowledge" },
               { label: "Group Settings", href: "/department/group" },
             ]}
+            collapsed={isCollapsed}
+            onOpen={() => setIsCollapsed(false)} // auto-expand on dropdown click
           />
-          <SidebarItem icon={<Call size="18" color="#7988A9" />} label="Phone numbers" href="/Phone" />
-          <SidebarItem icon={<TaskSquare size="18" color="#7988A9" />} label="My to do Protocols" href="/Protocols" />
-          <SidebarItem icon={<NotificationBing size="18" color="#7988A9" />} label="My Notifications" href="/docs" />
-          <SidebarItem icon={<MenuBoard size="18" color="#7988A9" />} label="Knowledge Base" href="/Knowledge" />
-          <SidebarItem icon={<MessageEdit size="18" color="#7988A9" />} label="Super Admin" href="/Admin" />
+          <SidebarItem
+            icon={<Call size="18" color="#7988A9" />}
+            label="Phone numbers"
+            href="/Phone"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<TaskSquare size="18" color="#7988A9" />}
+            label="My to do Protocols"
+            href="/Protocols"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<NotificationBing size="18" color="#7988A9" />}
+            label="My Notifications"
+            href="/docs"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<MenuBoard size="18" color="#7988A9" />}
+            label="Knowledge Base"
+            href="/Knowledge"
+            collapsed={isCollapsed}
+          />
+          <SidebarItem
+            icon={<MessageEdit size="18" color="#7988A9" />}
+            label="Super Admin"
+            href="/Admin"
+            collapsed={isCollapsed}
+          />
 
           <SidebarDropdown
             icon={<Edit size="18" color="#7988A9" />}
@@ -86,57 +169,73 @@ const Sidebar = () => {
               { label: "Department Rules", href: "/admin/rules" },
               { label: "Follow up system", href: "/admin/followup" },
             ]}
+            collapsed={isCollapsed}
+            onOpen={() => setIsCollapsed(false)} // auto-expand on dropdown click
           />
         </VStack>
       </Box>
 
       {/* Footer Section */}
-      <Box
-        p={4}
-        mx={8}
-        my={5}
-        rounded="10px"
-        bg="#F7F7F7"
-        borderWidth="1px"
-        borderColor="#CDD6E9"
-        display="flex"
-        flexDir="column"
-        gap={3}
-      >
-        <Select.Root collection={frameworks} size="sm" width="100%">
-          <Select.HiddenSelect />
-          <Select.Control backgroundColor="#FFFFFF" px='3' py='1.5' rounded="8px" >
-            <Select.Trigger borderWidth="0px">
-              <Select.ValueText color='#464B50' placeholder="English" />
-            </Select.Trigger>
-            <Select.IndicatorGroup>
-              <Select.Indicator />
-            </Select.IndicatorGroup>
-          </Select.Control>
-          <Portal>
-            <Select.Positioner>
-              <Select.Content>
-                {frameworks.items.map((framework) => (
-                  <Select.Item item={framework} key={framework.value}>
-                    {framework.label}
-                    <Select.ItemIndicator />
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Positioner>
-          </Portal>
-        </Select.Root>
+      {!isCollapsed && (
+        <Box
+          p={4}
+          mx={8}
+          my={5}
+          rounded="10px"
+          bg="#F7F7F7"
+          borderWidth="1px"
+          borderColor="#CDD6E9"
+          display="flex"
+          flexDir="column"
+          gap={3}
+        >
+          <Select.Root collection={frameworks} size="sm" width="100%">
+            <Select.HiddenSelect />
+            <Select.Control
+              backgroundColor="#FFFFFF"
+              px="3"
+              py="1.5"
+              rounded="8px"
+            >
+              <Select.Trigger borderWidth="0px">
+                <Select.ValueText color="#464B50" placeholder="English" />
+              </Select.Trigger>
+              <Select.IndicatorGroup>
+                <Select.Indicator />
+              </Select.IndicatorGroup>
+            </Select.Control>
+            <Portal>
+              <Select.Positioner>
+                <Select.Content>
+                  {frameworks.items.map((framework) => (
+                    <Select.Item item={framework} key={framework.value}>
+                      {framework.label}
+                      <Select.ItemIndicator />
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Positioner>
+            </Portal>
+          </Select.Root>
 
-        <Flex backgroundColor="#FFFFFF" px='4' py='3' rounded="8px" align="center" justify="space-between">
-          <Text fontSize="sm" color="#464B50">
-            Dark mode
-          </Text>
-          <Switch.Root>
-            <Switch.HiddenInput />
-            <Switch.Control />
-          </Switch.Root>
-        </Flex>
-      </Box>
+          <Flex
+            backgroundColor="#FFFFFF"
+            px="4"
+            py="3"
+            rounded="8px"
+            align="center"
+            justify="space-between"
+          >
+            <Text fontSize="sm" color="#464B50">
+              Dark mode
+            </Text>
+            <Switch.Root>
+              <Switch.HiddenInput />
+              <Switch.Control />
+            </Switch.Root>
+          </Flex>
+        </Box>
+      )}
     </Box>
   );
 };

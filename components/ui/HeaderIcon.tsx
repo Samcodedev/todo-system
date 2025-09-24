@@ -14,7 +14,7 @@ const HeaderIcon: React.FC<HeaderIconProps> = ({
   alt
 }) => {
   return (
-    <Flex borderWidth='1px' minH='40px' minW='40px' padding='2' rounded='10px' borderColor='#CDD6E9'>
+    <Flex borderWidth='1px' minH='40px' minW='40px' padding='2' rounded='10px' borderColor='#CDD6E9' cursor='pointer'>
         <Image
             src={`${src}`}
             width='25'

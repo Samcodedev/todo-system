@@ -9,54 +9,68 @@ interface SidebarDropdownProps {
   icon: React.ReactNode;
   label: string;
   items: { label: string; href: string }[];
+  collapsed?: boolean;
+  expandSidebar?: () => void;
 }
 
-const SidebarDropdown: React.FC<SidebarDropdownProps> = ({ icon, label, items }) => {
+const SidebarDropdown: React.FC<SidebarDropdownProps> = ({
+  icon,
+  label,
+  items,
+  collapsed = false,
+  expandSidebar,
+}) => {
   const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    if (collapsed && expandSidebar) {
+      expandSidebar(); // expand sidebar if collapsed
+      setOpen(true);
+    } else {
+      setOpen(!open);
+    }
+  };
 
   return (
     <Box pr={5} w="full">
-      {/* Toggle Button */}
-      <Button
-        onClick={() => setOpen(!open)}
-        variant="ghost"
+      <Flex
+        onClick={handleClick}
         w="full"
-        justifyContent="space-between"
-        alignItems="center"
+        align="center"
+        justify={collapsed ? "center" : "space-between"}
+        px={collapsed ? 4 : 8}
+        py={4}
         rounded="md"
+        cursor="pointer"
         _hover={{ bg: "gray.50" }}
-        px={8}
-        py={6}
       >
-        <Flex align="center" gap={4}>
+        <Flex align="center" gap={collapsed ? 0 : 4}>
           <Box fontSize="lg">{icon}</Box>
-          <Text fontSize="sm" color="#6C7278">
-            {label}
-          </Text>
+          {!collapsed && (
+            <Text fontSize="sm" color="#6C7278">
+              {label}
+            </Text>
+          )}
         </Flex>
 
-        {open ? (
-          <FiChevronRight color="#7988A9" size={18} />
-        ) : (
-          <FiChevronDown color="#7988A9" size={18} style={{ marginRight: "10px" }} />
-        )}
-      </Button>
+        {!collapsed &&
+          (open ? (
+            <FiChevronDown color="#7988A9" size={18} />
+          ) : (
+            <FiChevronRight color="#7988A9" size={18} />
+          ))}
+      </Flex>
 
-      {/* Dropdown Items */}
-      {open && (
+      {!collapsed && open && (
         <VStack align="stretch" spacing={1} ml={5} mt={2}>
           {items.map((item, idx) => (
-            <SidebarItem
-              key={idx}
-              // icon={<Box w={2} h={2} rounded="full" bg="gray.400" />}
-              label={item.label}
-              href={item.href}
-            />
+            <SidebarItem key={idx} label={item.label} href={item.href} icon />
           ))}
         </VStack>
       )}
     </Box>
   );
 };
+
 
 export default SidebarDropdown;

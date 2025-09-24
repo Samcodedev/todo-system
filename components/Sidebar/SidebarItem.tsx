@@ -11,6 +11,7 @@ interface SidebarItemProps {
   href?: string;
   active?: boolean;
   onClick?: () => void;
+  collapsed?: boolean;
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
@@ -19,6 +20,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   href = "#",
   active,
   onClick,
+  collapsed = false,
 }) => {
   const pathname = usePathname();
   const isActive = pathname === href || active;
@@ -29,9 +31,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       href={href}
       onClick={onClick}
       py={4}
-      px={8}
-      mr={5}
-      gap={4}
+      px={collapsed ? 4 : 8}
+      gap={collapsed ? 0 : 4}
       rounded="md"
       align="center"
       cursor="pointer"
@@ -41,13 +42,15 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       _hover={{
         bg: isActive ? "blue.50" : "gray.50",
       }}
+      justify={collapsed ? "center" : "flex-start"}
     >
       <Box fontSize="lg" color={isActive ? "#75C5C1" : "#464B50"}>
         {icon}
       </Box>
-      <Text fontSize="sm">{label}</Text>
+      {!collapsed && <Text fontSize="sm">{label}</Text>}
     </Flex>
   );
 };
+
 
 export default SidebarItem;

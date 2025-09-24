@@ -30,7 +30,7 @@ const Header = () => {
   ]
   return (
     <Flex width='full' justifyContent='space-between' paddingX='60px' alignItems='center' borderBottomWidth='1px' borderColor='#CDD6E9' height='90px' bgColor='white' >
-        <InputGroup width='300px' startElement={<SearchNormal1 size='18px' color="#1A1C1E" />} endElement={<CloseCircle size='18px' color="#1A1C1E" />}>
+        <InputGroup width='300px' startElement={<SearchNormal1 size='18px' color="#1A1C1E" />} endElement={<CloseCircle size='18px' cursor='pointer' color="#1A1C1E" />}>
             <Input borderWidth='1px' color='#1A1C1E' borderRadius='10px' backgroundColor='#F7F7F7' borderColor='#CDD6E9' placeholder="M91" />
         </InputGroup>
 
@@ -57,7 +57,7 @@ const Header = () => {
             
           </Flex>
           <Button rounded='10px' paddingY='18px' height='48px' borderWidth='1px' borderColor='#EEF1F9' marginLeft='10PX' bgColor='#F7F7F7'>
-            <Link1 color="#464B50"/>
+            <Link1 size='20px' color="#464B50"/>
           </Button>
         </Flex>
         
@@ -68,7 +68,7 @@ const Header = () => {
             <Notification color="#464B50"/>
           </Button>
 
-          <Flex alignItems='center' width='fit-content' gapX='18px' marginLeft='10px' backgroundColor='#F7F7F7' paddingY='3px' paddingX='3px' paddingRight='10px' rounded='40px'>
+          <Flex alignItems='center' width='fit-content' gapX='18px' cursor='pointer' marginLeft='10px' backgroundColor='#F7F7F7' paddingY='3px' paddingX='3px' paddingRight='10px' rounded='40px'>
             <Image
               src={`/avatars/profileImage.png`}
               width='45'
