@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📌 Todo System
 
-## Getting Started
+A simple and efficient **task management system** built with React, Chakra UI, and LocalStorage. This project allows users to create, view, and manage their daily tasks with ease.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+* **Add Tasks** – Create tasks with name, description, priority, assignee, and due date.
+* **View Tasks** – Display tasks in a clean, responsive table.
+* **Persistent Storage** – Tasks are stored in browser `localStorage`.
+* **Modern UI** – Styled with Chakra UI for a clean and responsive design.
+
+---
+
+## 🛠️ Tech Stack
+
+* **React.js** – Frontend framework
+* **Chakra UI** – Component library for styling
+* **LocalStorage** – For storing tasks persistently
+* **React Icons, and consax-react** – For task action icons
+
+---
+
+## 📂 Project Structure
+
+```
+todo-system/
+├── component/
+|   |
+│   ├──Body/ 
+|   |
+│   ├──Sidebar/
+|   |
+│   |
+|   └──Ui/
+|   
+└── public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Installation & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone https://github.com/Samcodedev/todo-system.git
+   cd todo-system
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run the development server:
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Open in browser:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 📖 Usage
+
+1. **Add a Task** – Click on the `Add Task` button and fill in the details.
+2. **View Tasks** – All tasks will appear in the dashboard table.
+3. **Edit a Task** – Use the edit icon to update task details. (work in progress)
+
+---
+
+## 📝 Example Task Object
+
+```json
+{
+  "id": 1758837310858,
+  "name": "Testing Task",
+  "description": "Hello just testing",
+  "priority": "High",
+  "assignee": {
+    "value": ["Adison Mango"],
+    "items": [
+      { "label": "Adison Mango", "value": "Adison Mango" }
+    ]
+  },
+  "date": "Fri Sep 26 2025"
+}
+```
+
+---
+
+## 🧑‍💻 Author
+
+**Samuel Obanla (Samcodedev)**
+🔗 [GitHub](https://github.com/Samcodedev)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** – feel free to use and modify it.
