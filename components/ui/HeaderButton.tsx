@@ -5,7 +5,6 @@ import {
   CloseButton,
   DataList,
   Dialog,
-  HStack,
   Portal,
   Textarea,
   VStack,
@@ -18,9 +17,6 @@ import {
   useListCollection,
   useListbox,
   Menu,
-  Input,
-  Kbd,
-  Span,
 } from '@chakra-ui/react'
 import { Calendar, Flag, ProfileCircle, Slash, Status, Stickynote, TaskSquare } from 'iconsax-react'
 import { useState, useRef } from 'react'
@@ -106,7 +102,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   })
   const selectedPriorityItem = priorityListbox.selectedItems[0]
 
-  // handle save
+
   const handleSaveTask = () => {
     if (!name) {
       alert("Please enter a task name")
@@ -142,7 +138,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
     }
   }
 
-  // Only the JSX is conditionally rendered
+
   if (text === 'Add Task') {
     return (
       <VStack alignItems="start" rounded='10px'>

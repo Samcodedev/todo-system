@@ -47,7 +47,7 @@ const formatRange = (startISO: string, endISO: string): string => {
     year: "numeric",
   };
 
-  // force stable locale (same on server & client)
+
   return `${s.toLocaleDateString("en-GB", opts)} - ${e.toLocaleDateString(
     "en-GB",
     opts
@@ -56,9 +56,9 @@ const formatRange = (startISO: string, endISO: string): string => {
 
 
 const priorityStyle = (p: Priority) => {
-  if (p === "Medium") return { color: "#75C5C1", bg: "#DBEAFE" }; // Blue
-  if (p === "Important") return { color: "#F6BE38", bg: "#FEF3C7" }; // Amber
-  return { color: "#FF515D", bg: "#FEE2E2" }; // Red
+  if (p === "Medium") return { color: "#75C5C1", bg: "#DBEAFE" };
+  if (p === "Important") return { color: "#F6BE38", bg: "#FEF3C7" };
+  return { color: "#FF515D", bg: "#FEE2E2" };
 };
 
 function getPageButtons(current: number, total: number): number[] {
@@ -297,7 +297,7 @@ const TaskTablePage = () => {
               </Table.Root>
             </Box>
 
-            {/* Pagination & Rows Per Page */}
+            {/* Pagination section */}
             <Flex
               align="center"
               justify="space-between"
