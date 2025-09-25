@@ -1,4 +1,11 @@
-import { Box, Button, Flex, Switch, Text } from "@chakra-ui/react"
+import { 
+  Box, 
+  Button, 
+  Flex, 
+  Switch, 
+  Text
+
+} from "@chakra-ui/react"
 import { AddCircle, ArrowCircleLeft2, Calendar, ExportCurve, Sort } from "iconsax-react"
 import HeaderButton from "./HeaderButton"
 
@@ -29,6 +36,7 @@ function TopBody() {
           <Button rounded='10px' paddingY='18px' height='48px' borderWidth='1px' borderColor='#EEF1F9' marginLeft='10PX' bgColor='#F7F7F7'>
             <Calendar color="#464B50"/>
           </Button>
+          
           {
             topBodyButton.map((item) => {
               return(
