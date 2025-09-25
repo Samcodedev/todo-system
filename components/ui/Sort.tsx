@@ -18,7 +18,7 @@ const Sort: React.FC<SortProps> = ({ active, onClick, type }) => {
       width="32px"
       height="32px"
       rounded="3px"
-      backgroundColor={active ? "#E9F5F7" : "#F7F7F7"}
+      backgroundColor={active ? "#75C5C1" : "#F7F7F7"}
       cursor="pointer"
     >
       {type === "horizontal" ? (
