@@ -1,8 +1,7 @@
-import { 
-  Button, 
+'use client'
+
+import {
   Text,
-  Avatar,
-  Badge,
   CloseButton,
   DataList,
   Dialog,
@@ -11,8 +10,22 @@ import {
   Textarea,
   VStack,
   Flex,
+  Editable,
+
+  Button,
+  Listbox,
+  Popover,
+  useFilter,
+  useListCollection,
+  useListbox,
+  Menu,
+  Input
 } from '@chakra-ui/react'
 import { Calendar, Flag, ProfileCircle, Status, Stickynote, TaskSquare } from 'iconsax-react';
+import { useState, useRef } from 'react';
+import { LuChevronDown } from "react-icons/lu"
+                        
+import { SingleDatepicker } from "chakra-dayzed-datepicker";
 
 interface HeaderButtonProps {
   color: String;
@@ -31,6 +44,45 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
 }) => {
 
   if(text === 'Add Task') {
+    const [name, setName] = useState("")
+    const [date, setDate] = useState(new Date());
+
+    
+    const [inputValue, setInputValue] = useState("")
+    const [open, setOpen] = useState(false)
+
+    const { contains } = useFilter({ sensitivity: "base" })
+    const triggerRef = useRef<HTMLButtonElement | null>(null)
+
+    const { collection, filter } = useListCollection({
+      initialItems: [
+        { label: "React.js", value: "react" },
+        { label: "Vue.js", value: "vue" },
+        { label: "Angular", value: "angular" },
+        { label: "Svelte", value: "svelte" },
+        { label: "Next.js", value: "nextjs" },
+        { label: "Nuxt.js", value: "nuxtjs" },
+      ],
+      filter: contains,
+    })
+
+    const listbox = useListbox({
+      collection,
+      onValueChange() {
+        setOpen(false)
+        setInputValueFn("")
+        triggerRef.current?.focus()
+      },
+    })
+
+    const setInputValueFn = (value: string) => {
+      setInputValue(value)
+      filter(value)
+    }
+
+    const selectedItem = listbox.selectedItems[0]
+
+
     return(
       <VStack alignItems="start" rounded='10px'>
         <Dialog.Root size='lg' placement="center" motionPreset="slide-in-bottom">
@@ -45,7 +97,17 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
             <Dialog.Positioner>
               <Dialog.Content>
                 <Dialog.Header paddingBottom='10px' paddingTop='50px' backgroundColor='white'>
-                  <Dialog.Title color='#BAC1CC' fontSize='30px' >Task Name</Dialog.Title>
+                  <Dialog.Title >
+                    <Editable.Root 
+                      color='#BAC1CC' fontSize='30px'
+                      onValueChange={(e) => setName(e.value)}
+                      placeholder="Task Name"
+                      activationMode="dblclick"
+                    >
+                      <Editable.Preview backgroundColor='white' />
+                      <Editable.Input />
+                    </Editable.Root>
+                  </Dialog.Title>
                 </Dialog.Header>
                 <Dialog.Body pb="8" backgroundColor='white' color='#464B50'>
                   <DataList.Root orientation="horizontal">
@@ -58,22 +120,78 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
                         </Flex>
                       </DataList.ItemValue>
                     </DataList.Item>
+
                     <DataList.Item marginTop='15px'>
                       <DataList.ItemLabel fontWeight='600' gap='10px' color='#464B50'> <Calendar size='24px' color='#BAC1CC' /> Dates</DataList.ItemLabel>
                       
-                      <DataList.ItemValue color='#BAC1CC'>12th August 2024</DataList.ItemValue>
+                      <DataList.ItemValue color='#BAC1CC'>
+                      
+                        <SingleDatepicker
+                          name="date-input"
+                          date={date}
+                          onDateChange={setDate}
+                        />
+
+                      </DataList.ItemValue>
                     </DataList.Item>
+
                     <DataList.Item marginTop='15px'>
                       <DataList.ItemLabel fontWeight='600' gap='10px' color='#464B50'> <ProfileCircle size='24px' color='#BAC1CC' /> Assignees</DataList.ItemLabel>
                       <DataList.ItemValue color='#BAC1CC'>
-                        <HStack>
-                          Segun Adebayo
-                        </HStack>
+                        
+                        
+                      <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+                        <Popover.Trigger asChild>
+                          <Button size="sm" ref={triggerRef} color='#BAC1CC'>
+                            {selectedItem ? selectedItem.label : "Select"} <LuChevronDown />
+                          </Button>
+                        </Popover.Trigger>
+
+                        <Portal>
+                          <Popover.Positioner>
+                            <Popover.Content _closed={{ animation: "none" }}>
+                              <Popover.Body p="0">
+                                <Listbox.RootProvider roundedBottom='5px' backgroundColor='white' roundedTop='5px' value={listbox} gap="0" overflow="hidden">
+                                  <Listbox.Input
+                                    minH="10"
+                                    px="3"
+                                    roundedTop="l2"
+                                    bg="transparent"
+                                    outline="0"
+                                    backgroundColor='#EEF1F9'
+                                    margin='10px'
+                                    value={inputValue}
+                                    onChange={(e) => setInputValueFn(e.currentTarget.value)}
+                                  />
+                                  <Listbox.Content
+                                    backgroundColor='white'
+                                    color='#464B50'
+                                    borderWidth="0"
+                                    roundedTop="0"
+                                    gap="0"
+                                    
+                                  >
+                                    {collection.items.map((framework) => (
+                                      <Listbox.Item item={framework} key={framework.value}>
+                                        <Listbox.ItemText>{framework.label}</Listbox.ItemText>
+                                        <Listbox.ItemIndicator />
+                                      </Listbox.Item>
+                                    ))}
+                                  </Listbox.Content>
+                                </Listbox.RootProvider>
+                              </Popover.Body>
+                            </Popover.Content>
+                          </Popover.Positioner>
+                        </Portal>
+                      </Popover.Root>
+
+
                       </DataList.ItemValue>
                     </DataList.Item>
                     <DataList.Item marginTop='15px'>
                       <DataList.ItemLabel fontWeight='600' gap='10px' color='#464B50'> <Flag size='24px' color='#BAC1CC' />Priority</DataList.ItemLabel>
-                      <DataList.ItemValue color='#BAC1CC'> Select Priority</DataList.ItemValue>
+                      
+                      
                     </DataList.Item>
                     <DataList.Item marginTop='15px'>
                       <DataList.ItemLabel fontWeight='600' gap='10px' color='#464B50'> <Stickynote size='24px' color='#BAC1CC' /> Description</DataList.ItemLabel>
@@ -83,7 +201,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
                   <Textarea placeholder="Write something or type" marginTop='15px' height='150px' rounded='10px' color='#464B50' backgroundColor='#F7F7F7' border='none' />
                   <Button float='right' backgroundColor='#75C5C1' color='white' paddingX='60px' marginTop='40px' rounded='10px'>Create Task</Button>
                 </Dialog.Body>
-                <Dialog.CloseTrigger>
+                <Dialog.CloseTrigger backgroundColor='white'>
                   <CloseButton color='#464B50' size="sm" />
                 </Dialog.CloseTrigger>
               </Dialog.Content>
