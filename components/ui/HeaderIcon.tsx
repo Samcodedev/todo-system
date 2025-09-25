@@ -4,17 +4,17 @@ import { Box, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 
 
-interface SidebarItemProps {
+interface HeaderIconProps {
   src: String;
   alt: string;
 }
 
-const HeaderIcon: React.FC<SidebarItemProps> = ({
+const HeaderIcon: React.FC<HeaderIconProps> = ({
   src,
   alt
 }) => {
   return (
-    <Flex borderWidth='1px' minH='40px' minW='40px' padding='2' rounded='10px' borderColor='#CDD6E9'>
+    <Flex borderWidth='1px' minH='40px' minW='40px' padding='2' rounded='10px' borderColor='#CDD6E9' cursor='pointer'>
         <Image
             src={`${src}`}
             width='25'
