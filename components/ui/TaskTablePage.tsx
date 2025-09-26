@@ -309,7 +309,7 @@ const TaskTablePage = () => {
               borderTop="none"
             >
               <HStack
-                spacing={2}
+                gap={2}
                 backgroundColor="#F7F7F7"
                 rounded="20px"
                 paddingY="3px"

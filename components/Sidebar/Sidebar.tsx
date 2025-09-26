@@ -81,7 +81,7 @@ const Sidebar = () => {
         </Flex>
 
         {/* Menu Items */}
-        <VStack align="stretch" mb="70px" spacing={1}>
+        <VStack align="stretch" mb="70px" gap={1}>
           <SidebarItem
             icon={<Category size="18" color="#7988A9" />}
             label="Home"
@@ -126,7 +126,7 @@ const Sidebar = () => {
               { label: "Group Settings", href: "/department/group" },
             ]}
             collapsed={isCollapsed}
-            onOpen={() => setIsCollapsed(false)}
+            expandSidebar={() => setIsCollapsed(false)}
           />
           <SidebarItem
             icon={<Call size="18" color="#7988A9" />}
@@ -170,7 +170,7 @@ const Sidebar = () => {
               { label: "Follow up system", href: "/admin/followup" },
             ]}
             collapsed={isCollapsed}
-            onOpen={() => setIsCollapsed(false)}
+            expandSidebar={() => setIsCollapsed(false)}
           />
         </VStack>
       </Box>

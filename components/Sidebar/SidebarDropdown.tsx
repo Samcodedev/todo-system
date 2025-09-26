@@ -62,7 +62,7 @@ const SidebarDropdown: React.FC<SidebarDropdownProps> = ({
       </Flex>
 
       {!collapsed && open && (
-        <VStack align="stretch" spacing={1} ml={5} mt={2}>
+        <VStack align="stretch" gap={1} ml={5} mt={2}>
           {items.map((item, idx) => (
             <SidebarItem key={idx} label={item.label} href={item.href} icon />
           ))}

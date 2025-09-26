@@ -42,7 +42,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   const [name, setName] = useState("")
   const [status, setStatus] = useState("Urgent")
   const [date, setDate] = useState<Date | undefined>(new Date())
-  const [assignee, setAssignee] = useState("")
+  const [assignee, setAssignee] = useState<string>("");
   const [priority, setPriority] = useState("")
   const [description, setDescription] = useState("")
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -66,8 +66,8 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
 
   const assigneeListbox = useListbox({
     collection: assigneeCollection,
-    onValueChange(key) {
-      setAssignee(key as string)
+    onValueChange() {
+      setAssignee("")
       setAssigneePopoverOpen(false)
       setAssigneeInputValue("")
       assigneeTriggerRef.current?.focus()
