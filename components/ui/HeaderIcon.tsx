@@ -1,11 +1,11 @@
 "use client";
 
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Image from "next/image";
 
 
 interface HeaderIconProps {
-  src: String;
+  src: string;
   alt: string;
 }
 
@@ -19,7 +19,7 @@ const HeaderIcon: React.FC<HeaderIconProps> = ({
             src={`${src}`}
             width='25'
             height='25'
-            alt={alt}
+            alt={`${alt}`}
         />
     </Flex>
   )
