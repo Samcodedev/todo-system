@@ -271,9 +271,9 @@ const TaskTablePage = () => {
                     })
                   ) : (
                     <Table.Row>
-                      <Table.Cell colSpan={5} backgroundColor='white'>
+                      <Table.Cell colSpan={5} borderBottomColor='#CDD6E9' backgroundColor='white'>
                         <Text textAlign="center" py={6} color="gray.600">
-                          No rows
+                          No task
                         </Text>
                       </Table.Cell>
                     </Table.Row>
