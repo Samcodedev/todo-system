@@ -6,7 +6,7 @@ import { RowVertical, RowHorizontal } from "iconsax-react";
 interface SortProps {
   active: boolean;
   onClick: () => void;
-  type: "horizontal" | "vertical";
+  type: string;
 }
 
 const Sort: React.FC<SortProps> = ({ active, onClick, type }) => {

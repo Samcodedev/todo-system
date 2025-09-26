@@ -27,15 +27,24 @@ const frameworks = createListCollection({
   ],
 });
 
-type Priority = "Medium" | "Important" | "Urgent";
+
 type Task = {
-  id: string;
+  id: number | string;
   name: string;
-  start: string;
-  end: string;
-  assignees: { name: string; src?: string }[];
-  priority: Priority;
-};
+  description?: string;
+  date?: string;
+  priority?: {
+    value?: string[];
+    color?: string;
+  };
+  assignee?: {
+    value: string[];
+    items: { label: string; value: string }[];
+  };
+  title?: string;
+  start?: string;
+  end?: string;
+}
 
 // const formatRange = (startISO: string, endISO: string): string => {
 //   const s = new Date(startISO);
@@ -264,16 +273,16 @@ const TaskTablePage = () => {
                               <Portal>
                                 <Menu.Positioner>
                                   <Menu.Content backgroundColor="white" color="#464B50">
-                                    <Menu.Item _hover={{ bg: "#F7F7F7" }}>
+                                    <Menu.Item value="Open" _hover={{ bg: "#F7F7F7" }}>
                                       Open
                                     </Menu.Item>
-                                    <Menu.Item _hover={{ bg: "#F7F7F7" }}>
+                                    <Menu.Item value="Edit To Do" _hover={{ bg: "#F7F7F7" }}>
                                       Edit To Do
                                     </Menu.Item>
-                                    <Menu.Item _hover={{ bg: "#F7F7F7" }}>
+                                    <Menu.Item value="Delete To Do" _hover={{ bg: "#F7F7F7" }}>
                                       Delete To Do
                                     </Menu.Item>
-                                    <Menu.Item _hover={{ bg: "#F7F7F7" }}>
+                                    <Menu.Item value="New Window" _hover={{ bg: "#F7F7F7" }}>
                                       New Window
                                     </Menu.Item>
                                   </Menu.Content>
@@ -321,7 +330,7 @@ const TaskTablePage = () => {
                   color="#464B50"
                   fontSize="20px"
                   onClick={() => setPage(1)}
-                  isDisabled={page === 1}
+                  disabled={page === 1}
                 >
                   «
                 </Button>
@@ -333,7 +342,7 @@ const TaskTablePage = () => {
                   borderWidth="1px"
                   rounded="full"
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  isDisabled={page === 1}
+                  disabled={page === 1}
                 >
                   ‹
                 </Button>
@@ -365,7 +374,7 @@ const TaskTablePage = () => {
                   color="#464B50"
                   fontSize="20px"
                   onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  isDisabled={page === totalPages}
+                  disabled={page === totalPages}
                 >
                   ›
                 </Button>
@@ -375,7 +384,7 @@ const TaskTablePage = () => {
                   color="#464B50"
                   fontSize="20px"
                   onClick={() => setPage(totalPages)}
-                  isDisabled={page === totalPages}
+                  disabled={page === totalPages}
                 >
                   »
                 </Button>
@@ -392,7 +401,7 @@ const TaskTablePage = () => {
                   borderWidth="1px"
                   borderColor="#75C5C1"
                   width="86px"
-                  value={String(rowsPerPage)}
+                  value={[String(rowsPerPage)]}
                   onValueChange={(val) => {
                     setRowsPerPage(Number(val.value));
                     setPage(1);

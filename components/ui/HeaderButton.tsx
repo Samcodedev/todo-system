@@ -96,8 +96,8 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
 
   const priorityListbox = useListbox({
     collection: priorityCollection,
-    onValueChange(key) {
-      setPriority(key as string)
+    onValueChange() {
+      setPriority("")
       setPriorityPopoverOpen(false)
       setPriorityInputValue("")
       priorityTriggerRef.current?.focus()
@@ -145,7 +145,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   if (text === 'Add Task') {
     return (
       <VStack alignItems="start" rounded='10px'>
-        <Dialog.Root size='lg' placement="center" motionPreset="slide-in-bottom" open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog.Root size='lg' placement="center" motionPreset="slide-in-bottom" open={isDialogOpen}>
           <Dialog.Trigger asChild>
             <Button paddingY={`${padding}`} paddingX={`${paddingV}`} rounded='10px' backgroundColor={`${color}`} onClick={() => setIsDialogOpen(true)}>
               {icon}
@@ -187,14 +187,14 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
                             <Menu.Positioner>
                               <Menu.Content backgroundColor='white' borderWidth='1px' shadowColor='none' borderColor='#CDD6E9' zIndex="tooltip">
                                 <Menu.ItemGroup>
-                                  <Menu.Item color='#464B50' onClick={() => setStatus('Urgent')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#FF515D' /> Urgent</Menu.Item>
-                                  <Menu.Item color='#464B50' onClick={() => setStatus('Important')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#F6BE38' />Important</Menu.Item>
-                                  <Menu.Item color='#464B50' onClick={() => setStatus('Normal')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#75C5C1' />Normal</Menu.Item>
-                                  <Menu.Item color='#464B50' onClick={() => setStatus('Low')} display='flex' gap='3px' alignItems='center' backgroundColor='white' cursor='pointer'><Flag size='20px' variant="Bold" color='#BAC1CC' />Low</Menu.Item>
+                                  <Menu.ItemGroupLabel color='#464B50' onClick={() => setStatus('Urgent')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#FF515D' /> Urgent</Menu.ItemGroupLabel>
+                                  <Menu.Item color='#464B50' value='Important' onClick={() => setStatus('Important')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#F6BE38' />Important</Menu.Item>
+                                  <Menu.Item color='#464B50' value='Normal' onClick={() => setStatus('Normal')} display='flex' gap='3px' alignItems='center' backgroundColor='white'><Flag size='20px' variant="Bold" color='#75C5C1' />Normal</Menu.Item>
+                                  <Menu.ItemGroupLabel color='#464B50' onClick={() => setStatus('Low')} display='flex' gap='3px' alignItems='center' backgroundColor='white' cursor='pointer'><Flag size='20px' variant="Bold" color='#BAC1CC' />Low</Menu.ItemGroupLabel>
                                 </Menu.ItemGroup>
                                 <Menu.Separator borderColor='#CDD6E9' />
                                 <Menu.ItemGroup>
-                                  <Menu.Item color='#464B50' onClick={() => setStatus('Clear')} display='flex' gap='3px' alignItems='center' backgroundColor='white' cursor='pointer'><Slash size='20px' color='#7988A9' /> Clear</Menu.Item>
+                                  <Menu.ItemGroupLabel color='#464B50' onClick={() => setStatus('Clear')} display='flex' gap='3px' alignItems='center' backgroundColor='white' cursor='pointer'><Slash size='20px' color='#7988A9' /> Clear</Menu.ItemGroupLabel>
                                 </Menu.ItemGroup>
                               </Menu.Content>
                             </Menu.Positioner>
