@@ -46,30 +46,6 @@ type Task = {
   end?: string;
 }
 
-// const formatRange = (startISO: string, endISO: string): string => {
-//   const s = new Date(startISO);
-//   const e = new Date(endISO);
-
-//   const opts: Intl.DateTimeFormatOptions = {
-//     day: "2-digit",
-//     month: "2-digit",
-//     year: "numeric",
-//   };
-
-
-//   return `${s.toLocaleDateString("en-GB", opts)} - ${e.toLocaleDateString(
-//     "en-GB",
-//     opts
-//   )}`;
-// };
-
-
-// const priorityStyle = (p: Priority) => {
-//   if (p === "Medium") return { color: "#75C5C1", bg: "#DBEAFE" };
-//   if (p === "Important") return { color: "#F6BE38", bg: "#FEF3C7" };
-//   return { color: "#FF515D", bg: "#FEE2E2" };
-// };
-
 function getPageButtons(current: number, total: number): number[] {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
   if (current <= 4) return [1, 2, 3, 4, 5, -1, total];
@@ -295,7 +271,7 @@ const TaskTablePage = () => {
                     })
                   ) : (
                     <Table.Row>
-                      <Table.Cell colSpan={5}>
+                      <Table.Cell colSpan={5} backgroundColor='white'>
                         <Text textAlign="center" py={6} color="gray.600">
                           No rows
                         </Text>
