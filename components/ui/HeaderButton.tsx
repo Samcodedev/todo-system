@@ -80,8 +80,11 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
   const [priorityPopoverOpen, setPriorityPopoverOpen] = useState(false)
   const priorityTriggerRef = useRef<HTMLButtonElement | null>(null)
 
+  console.log(priorityInputValue);
+  
+
   const { contains: containsPriority } = useFilter({ sensitivity: "base" })
-  const { collection: priorityCollection, filter: filterPriority } = useListCollection({
+  const { collection: priorityCollection } = useListCollection({
     initialItems: [
       { label: "Urgent", value: "Urgent", color: "#FF515D" },
       { label: "Important", value: "Important", color: "#F6BE38" },

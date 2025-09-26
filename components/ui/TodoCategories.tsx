@@ -1,9 +1,9 @@
 import { Flex, Text } from '@chakra-ui/react'
 
 interface TodoCategoriesProps {
-    text: String, 
-    color: String, 
-    value: Number, 
+    text: string, 
+    color: string, 
+    value: number, 
     icon: React.ReactNode
 }
 
